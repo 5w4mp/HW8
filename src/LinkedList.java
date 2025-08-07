@@ -46,7 +46,7 @@ public class LinkedList
      * Merge sort goes into this class
      * in
      */
-    public LinkedList merge(L)
+    public LinkedList merge(LinkedList A, LinkedList B)
     {
 
     }
