@@ -54,15 +54,74 @@ public class LinkedList
             sw.next.data = fud;
         }
     }
+    public Object getFirst()
+    {
+        if(this.head.next == null)
+            return null;
+        return this.head.next.data;
+    }
 
+    public LinkedList merge(LinkedList A, LinkedList B)
+    {
+        LinkedList sortedList = new LinkedList();
+        Comparable fa,fb;
+
+        while(!A.isEmpty() && !B.isEmpty())
+        {
+            fa = (Comparable)A.getFirst();
+            fb = (Comparable)B.getFirst();
+
+            if(fa.compareTo(fb) < 0)
+            {
+                A.removeFirst();
+                sortedList.addLast(fa);
+            }
+            else
+            {
+                B.removeFirst();
+                sortedList.addLast(fb);
+            }
+        }
+        while(!A.isEmpty())
+        {
+            fa = (Comparable)A.getFirst();
+            sortedList.addLast(fa);
+            A.removeFirst();
+        }
+        while(!B.isEmpty())
+        {
+            fb = (Comparable)B.getFirst();
+            sortedList.addLast(fb);
+            B.removeFirst();
+        }
+        return sortedList;
+    }
     /**
      * Need:
      * Merge sort goes into this class
      * in
      */
-    public LinkedList merge(LinkedList A, LinkedList B)
+    public void mergeSort() throws Exception
     {
-
+        Queue q = new Queue();
+        for(Node cur = this.head.next; cur != null ;cur = cur.next)
+        {
+            LinkedList list = new LinkedList();
+            list.addLast(cur.data);
+            q.enqueue(list);
+        }
+        while(q.size() > 1)
+        {
+            LinkedList listA = (LinkedList)q.dequeue();
+            LinkedList listB = (LinkedList)q.dequeue();
+            LinkedList tempList = merge(listA, listB);
+            q.enqueue(tempList);
+        }
+        LinkedList sortedList = (LinkedList)q.dequeue();
+        this.head = sortedList.head;
     }
+
+
+
 
 }

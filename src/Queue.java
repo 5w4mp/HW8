@@ -61,7 +61,7 @@ public class Queue
         this.head = this.head.next;
         this.size--;
         if(size == 0)
-            tail = null;
+            this.tail = null;
         return temp;
     }
 
