@@ -40,6 +40,20 @@ public class LinkedList
         cur.next.prev = this.head;
         this.size--;
     }
+    public void insertionSort()
+    {
+        Node ls, sw;
+        Comparable fud;
+        for(ls = this.head.next; ls != this.head.prev; ls = ls.next)
+        {
+            fud = (Comparable)ls.next.data;
+            for(sw = ls; sw != this.head && ((Comparable)sw.data).compareTo(fud)>0; sw = sw.prev)
+            {
+                sw.next.data = sw.data;
+            }
+            sw.next.data = fud;
+        }
+    }
 
     /**
      * Need:
