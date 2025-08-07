@@ -145,7 +145,7 @@ public class LinkedList
     {
         if(this.size <= 1){return true;}
 
-        for(Node cur = this.head.next; cur!=this.head; cur = cur.next)
+        for(Node cur = this.head.next; cur.next != this.head; cur = cur.next)
         {
             if(((Comparable)cur.data).compareTo(cur.next.data) > 0)
             {
