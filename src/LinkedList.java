@@ -35,6 +35,8 @@ public class LinkedList
 
     public void removeFirst()
     {
+        if(isEmpty())
+            return;
         Node cur = this.head.next;
         this.head.next = cur.next;
         cur.next.prev = this.head;
@@ -56,29 +58,30 @@ public class LinkedList
     }
     public Object getFirst()
     {
-        if(this.head.next == null)
+        if(isEmpty())
             return null;
         return this.head.next.data;
     }
 
     public LinkedList merge(LinkedList A, LinkedList B)
     {
+        //Create a new linked list, fa,fb included for scope.
         LinkedList sortedList = new LinkedList();
         Comparable fa,fb;
-
+        // While A is not empty and B is not empty
         while(!A.isEmpty() && !B.isEmpty())
         {
-            fa = (Comparable)A.getFirst();
+            fa = (Comparable)A.getFirst();//return first piece of data elements but not delete
             fb = (Comparable)B.getFirst();
-
+            //if fa < fb
             if(fa.compareTo(fb) < 0)
             {
-                A.removeFirst();
-                sortedList.addLast(fa);
+                A.removeFirst();//a becomes shorter
+                sortedList.addLast(fa);//O1
             }
             else
             {
-                B.removeFirst();
+                B.removeFirst();// B b
                 sortedList.addLast(fb);
             }
         }
@@ -104,7 +107,7 @@ public class LinkedList
     public void mergeSort() throws Exception
     {
         Queue q = new Queue();
-        for(Node cur = this.head.next; cur != null ;cur = cur.next)
+        for(Node cur = this.head.next; cur != this.head ;cur = cur.next)
         {
             LinkedList list = new LinkedList();
             list.addLast(cur.data);
@@ -120,8 +123,4 @@ public class LinkedList
         LinkedList sortedList = (LinkedList)q.dequeue();
         this.head = sortedList.head;
     }
-
-
-
-
 }
