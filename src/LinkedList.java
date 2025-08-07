@@ -81,22 +81,23 @@ public class LinkedList
             }
             else
             {
-                B.removeFirst();// B b
-                sortedList.addLast(fb);
+                B.removeFirst();// B becomes shorter
+                sortedList.addLast(fb);// O1
             }
         }
         while(!A.isEmpty())
         {
             fa = (Comparable)A.getFirst();
-            sortedList.addLast(fa);
+            sortedList.addLast(fa);// O1
             A.removeFirst();
         }
         while(!B.isEmpty())
         {
             fb = (Comparable)B.getFirst();
-            sortedList.addLast(fb);
+            sortedList.addLast(fb); // O1
             B.removeFirst();
         }
+        // return S
         return sortedList;
     }
     /**
@@ -106,21 +107,52 @@ public class LinkedList
      */
     public void mergeSort() throws Exception
     {
+        // Create queue object q, then enqueue each data object in the
+        // linked list to be sorted, as a single-node linked list.
         Queue q = new Queue();
+        //for each data object in the linked list to be sorted
         for(Node cur = this.head.next; cur != this.head ;cur = cur.next)
         {
+            //create a new linked list object, newList = new LinkedList
             LinkedList list = new LinkedList();
             list.addLast(cur.data);
             q.enqueue(list);
         }
+        //while there is more than one item in the Queue q
         while(q.size() > 1)
         {
-            LinkedList listA = (LinkedList)q.dequeue();
-            LinkedList listB = (LinkedList)q.dequeue();
-            LinkedList tempList = merge(listA, listB);
+            //dequeue and assign to LinkedList reference sublist1
+            LinkedList sublist1 = (LinkedList)q.dequeue();
+            //dequeue again and assign to another LLR sublist2
+            LinkedList sublist2 = (LinkedList)q.dequeue();
+            //walk through sorted sub1 and sub2 and merge them into a larger sorted list tempList
+            LinkedList tempList = merge(sublist1, sublist2);
             q.enqueue(tempList);
         }
+        //dequeue your sorted linked list.
         LinkedList sortedList = (LinkedList)q.dequeue();
+        //connect the head of the original LL to the head of sorted LL
         this.head = sortedList.head;
+    }
+
+    /***
+     *  If isSorted() returns true, the list has been sorted in ascending order.
+     *  Otherwise, it returns false.
+     *  Note: isSorted must run in the time complexity of O(n)
+     * @return boolean
+     */
+    public boolean isSorted()
+    {
+        if(this.size <= 1){return true;}
+
+        for(Node cur = this.head.next; cur!=this.head; cur = cur.next)
+        {
+            if(((Comparable)cur.data).compareTo(cur.next.data) > 0)
+            {
+                return false;
+            }
+        }
+        return true;
+
     }
 }
