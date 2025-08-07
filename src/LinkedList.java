@@ -153,6 +153,6 @@ public class LinkedList
             }
         }
         return true;
-
     }
+    public int getSize(){return this.size;}
 }
