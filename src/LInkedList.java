@@ -1,4 +1,4 @@
-public class LInkedList
+public class LinkedList
 {
 
     private class Node
@@ -15,7 +15,7 @@ public class LInkedList
     private Node head;
     private int size;
 
-    public LInkedList()
+    public LinkedList()
     {
         this.head = new Node(null, null, null);
         this.head.next = this.head;
@@ -46,7 +46,7 @@ public class LInkedList
      * Merge sort goes into this class
      * in
      */
-    public class DoublyLinkedList
+    public LinkedList merge(L)
     {
 
     }
